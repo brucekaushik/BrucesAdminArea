@@ -8,32 +8,26 @@ session_start();
 /* register session variables */ 
 
 // for login
-if (!isset($ses_loggedin)){
-    $ses_loggedin = "no";
-    session_register("ses_loggedin");
+if (!isset($_SESSION['loggedin'])){
+    $_SESSION['loggedin'] = "no";
 }
 
 // for logout
-$ses_loggedout = "no";
-session_register("ses_loggedout");
+$_SESSION['loggedout'] = "no";
 
 // for level of user
-if (!isset($ses_user_level)){
-    $ses_user_level = "none";
-    session_register("ses_user_level");
+if (!isset($_SESSION['user_level'])){
+    $_SESSION['user_level'] = "none";
 }
 
 // user is active
-if (!isset($ses_user_active)){
-    $ses_user_active = "none";
-    session_register("ses_user_active");
+if (!isset($_SESSION['user_active'])){
+    $_SESSION['user_active'] = "none";
 }
 
-
 // user name
-if (!isset($ses_username)){
-    $ses_username = "none";
-    session_register("ses_username");
+if (!isset($_SESSION['username'])){
+    $_SESSION['username'] = "none";
 }
 
 

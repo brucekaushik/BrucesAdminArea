@@ -7,11 +7,11 @@ session_start();
 require 'includes/dbConnect.inc.php';
 
 /*
-echo "Username => " . $ses_username . "<br>";
-echo "User Level =>" . $ses_user_level . "<br>";
-echo "User Active? => " . $ses_user_active . "<br>";
-echo "Logged In? => " . $ses_loggedin . "<br>";
-echo "Logged Out? => " . $ses_loggedout . "<br>";
+echo "Username => " . $_SESSION['username'] . "<br>";
+echo "User Level =>" . $_SESSION['user_level'] . "<br>";
+echo "User Active? => " . $_SESSION['user_active'] . "<br>";
+echo "Logged In? => " . $_SESSION['loggedin'] . "<br>";
+echo "Logged Out? => " . $_SESSION['loggedout'] . "<br>";
 //*/
 
 // if the registration request is submitted

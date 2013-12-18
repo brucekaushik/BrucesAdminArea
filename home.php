@@ -7,11 +7,11 @@ session_start();
 require 'includes/dbConnect.inc.php';
 
 
-echo "Username => " . $ses_username . "<br>";
-echo "User Level =>" . $ses_user_level . "<br>";
-echo "User Active? => " . $ses_user_active . "<br>";
-echo "Logged In? => " . $ses_loggedin . "<br>";
-echo "Logged Out? => " . $ses_loggedout . "<br>";
+echo "Username => " . $_SESSION['username'] . "<br>";
+echo "User Level =>" . $_SESSION['user_level'] . "<br>";
+echo "User Active? => " . $_SESSION['user_active'] . "<br>";
+echo "Logged In? => " . $_SESSION['loggedin'] . "<br>";
+echo "Logged Out? => " . $_SESSION['loggedout'] . "<br>";
 
 ?>
 
@@ -43,13 +43,13 @@ echo "Logged Out? => " . $ses_loggedout . "<br>";
 <?php
 
 // if the user is not logged in 
-if ($ses_loggedin == "no"){
+if ($_SESSION['loggedin'] == "no"){
     
     // if the user did not attempt to login (did not click the login button)
     if(!isset($_POST['login'])){
         
         // if the user has logged out before, show logout successful message
-        if ($ses_loggedout == "yes"){
+        if ($_SESSION['loggedout'] == "yes"){
             print "<br><center><div style='color: red'><b>Logout Successful, Please feel free to login again.</b></div></center>";
         }
         
@@ -87,10 +87,10 @@ if ($ses_loggedin == "no"){
             } else{ // if username and password match
 
                 // set session variables
-                $ses_username = $userDetailsRow['username'];
-                $ses_loggedin = "yes";
-                $ses_user_level = $userDetailsRow['level'];
-                $ses_user_active = $userDetailsRow['active'];
+                $_SESSION['username'] = $userDetailsRow['username'];
+                $_SESSION['loggedin'] = "yes";
+                $_SESSION['user_level'] = $userDetailsRow['level'];
+                $_SESSION['user_active'] = $userDetailsRow['active'];
 
                 // refresh page
                 printf("<script>location.href='home.php'</script>");
@@ -111,16 +111,16 @@ if ($ses_loggedin == "no"){
 }
 
 // if the user is logged in
-if($ses_loggedin == "yes"){
+if($_SESSION['loggedin'] == "yes"){
     
     // show logout link
     print "<br><center><a href='home.php?action=logout'>Logout</a></center><br>";
     
     // check if the user is active
-    if($ses_user_active == "yes"){
+    if($_SESSION['user_active'] == "yes"){
 
         // check level of the logged in user, display appropriate screen
-        switch ($ses_user_level){
+        switch ($_SESSION['user_level']){
             case "root":
                 require 'admin_users/rootUserDefaultScreen.inc.php';
             break;
@@ -280,9 +280,9 @@ if($ses_loggedin == "yes"){
             case "logout":
 
                 // set the session variables back to original values
-                $ses_loggedin = "no";
-                $ses_user_level = "none";
-                $ses_loggedout = "yes";
+                $_SESSION['loggedin'] = "no";
+                $_SESSION['user_level'] = "none";
+                $_SESSION['loggedout'] = "yes";
 
                 // refresh page
                 printf("<script>location.href='home.php'</script>");
