@@ -1,0 +1,62 @@
+.header{
+	border-bottom: 2px double #A65C3D;
+}
+
+.header h1{
+	font-family: "ChunkFiveRoman";
+	text-align: center;
+	color: #A65C3D;
+}
+
+.topnav{
+	padding: 0 0 30px 0;
+	font-size: 100%;
+	text-align: center;
+}
+
+.topnav a{
+	color: #5B4D4D;
+	padding: 10px;
+	font-family: "ChunkFiveRoman, lucida grande,tahoma,verdana,arial,sans-serif";
+}
+
+.container{
+	width: 60%;
+	margin: 0 auto;
+}
+
+.linkscontainer{
+	width: 60%;
+	margin: 0 auto;
+}
+
+#loginform input{
+	font-size: 25px;
+}
+
+.centeralign{
+	text-align: center;
+}
+
+.linkscontainer a{
+	padding: 10px;
+	background: #7F7F7F;
+	color: white;
+	float: left;
+	margin: 5px;
+	width: 46%;
+}
+
+.formscontainer{
+	clear:both;
+	margin: 0 auto;
+	width: 50%;
+}
+
+.formscontainer table{
+	width: 100%
+	}
+
+.formscontainer input,textarea{
+	width: 100%
+}
