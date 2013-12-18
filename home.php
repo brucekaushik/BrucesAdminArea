@@ -7,11 +7,9 @@ session_start();
 require 'includes/dbConnect.inc.php';
 
 
-echo "Username => " . $_SESSION['username'] . "<br>";
-echo "User Level =>" . $_SESSION['user_level'] . "<br>";
-echo "User Active? => " . $_SESSION['user_active'] . "<br>";
-echo "Logged In? => " . $_SESSION['loggedin'] . "<br>";
-echo "Logged Out? => " . $_SESSION['loggedout'] . "<br>";
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
 
 ?>
 
@@ -118,18 +116,32 @@ if($_SESSION['loggedin'] == "yes"){
     
     // check if the user is active
     if($_SESSION['user_active'] == "yes"){
+    	
+	    // for convenience sake
+        if(isset($_SESSION["action"])){
+        	
+        	$url = $_SESSION['verify_back_to'];
+        	
+        	unset($_SESSION['verify_back_to']);
+        	unset($_SESSION['action']);
+            	            	
+            // redirect the user to the application page
+            // printf("<script>location.href='$url'</script>"); // javascript is executed after php processes the code, therefore session variables are unset before getting redirected in this case, therefore user is not getting redirected immediately after logging in
+        	header ("Location: $url");
+        	
+        }
 
         // check level of the logged in user, display appropriate screen
         switch ($_SESSION['user_level']){
             case "root":
                 require 'admin_users/rootUserDefaultScreen.inc.php';
-            break;
+            	break;
             case "admin":
                 require 'admin_users/adminUserDefaultScreen.inc.php';
-            break;
+            	break;
             case "reg":
                 require 'registered_users/regUserDefaultScreen.inc.php';
-            break;
+            	break;
         }
 
     }else{ // if not active
@@ -139,10 +151,11 @@ if($_SESSION['loggedin'] == "yes"){
     }
     
     // check if anything is clicked after logging in
+    // or if action is initiated from launching an application
     if (isset($_GET['action'])){
-		
-        // for convenience sake
-        $action_taken = $_GET['action'];
+    	
+    	// for convinience
+    	$action_taken = $_GET["action"];
 		
         // show options according to the action taken
         switch ($action_taken){
@@ -151,13 +164,13 @@ if($_SESSION['loggedin'] == "yes"){
 
                 require 'admin_users/addAdmin.inc.php';
 
-            break;
+            	break;
 			
             case "addAdminSubmission":
 
                 require 'admin_users/addAdminSubmission.inc.php';
 
-            break;
+            	break;
 			
             case "editAdmin":
 
@@ -168,13 +181,13 @@ if($_SESSION['loggedin'] == "yes"){
                     require 'admin_users/editAdmin.inc.php';	
                 }
 
-            break;
+            	break;
 			
             case "editAdminSubmission":
 
                 require 'admin_users/editAdminSubmission.inc.php';
 
-            break;
+            	break;
 			
             case "deleteAdmin":
 
@@ -185,25 +198,25 @@ if($_SESSION['loggedin'] == "yes"){
                     require 'admin_users/deleteAdmin.inc.php';	
                 }
 
-            break;
+            	break;
 			
             case "deleteAdminSubmission":
 
                 require 'admin_users/deleteAdminSubmission.inc.php';
 
-            break;
+            	break;
 			
             case "addRegUser":
 
                 require 'registered_users/addRegUser.inc.php';		
 
-            break;
+            	break;
 			
             case "addRegUserSubmission":
 
                 require 'registered_users/addRegUserSubmission.inc.php';
 
-            break;
+            	break;
 			
             case "editRegUser":
 
@@ -214,13 +227,13 @@ if($_SESSION['loggedin'] == "yes"){
                     require 'registered_users/editRegUser.inc.php';;	
                 }
 
-            break;
+            	break;
 			
             case "editRegUserSubmission":
 
                 require 'registered_users/editRegUserSubmission.inc.php';
 
-            break;
+            	break;
 						
             case "deleteRegUser":
 
@@ -231,50 +244,48 @@ if($_SESSION['loggedin'] == "yes"){
                     require 'registered_users/deleteRegUser.inc.php';	
                 }
 
-            break;
+            	break;
 			
             case "deleteRegUserSubmission":
 
                 require 'registered_users/deleteRegUserSubmission.inc.php';
 
-            break;
-        
+            	break;
+            
             case "BlackJack":
-                
-                // redirect the user to the blackjack home page.
-                printf("<script>location.href='../09-blackjack/home.php'</script>");
-			
-            // logout is clicked
-                
-            break;
+            
+            	// redirect the user to the blackjack home page.
+            	printf("<script>location.href='../BrucesBlackjack/home.php'</script>");
+            	 
+            	break;
             
             case "ShoppingCart":
             
             	// redirect the user to the shopping cart home page.
-            	printf("<script>location.href='../10-shoppingCart/index2.php'</script>");
-            		
-            break;
+            	printf("<script>location.href='../BrucesShoppingCart/index2.php'</script>");
+            
+            	break;
             
             case "Newsletter":
-            	
+            	 
             	// redirect the user to the newsletter home page.
-            	printf("<script>location.href='../11-newsletter/index2.php'</script>");
-            	
-            break;
+            	printf("<script>location.href='../BrucesNewsletter/index2.php'</script>");
+            	 
+            	break;
             
             case "CMS":
-            	
+            	 
             	// redirect the use to the cms home page
-            	printf("<script>location.href='../12-cms/index2.php'</script>");
-            	
-            break;
+            	printf("<script>location.href='../BrucesCMS/index2.php'</script>");
+            	 
+            	break;
             
             case "SS":
-            	 
+            
             	// redirect the use to the cms home page
-            	printf("<script>location.href='../13-surveySystem/index2.php'</script>");
-            	 
-            break;
+            	printf("<script>location.href='../BrucesSurveySystem/index2.php'</script>");
+            
+            	break;
         
             // logout is clicked
             case "logout":

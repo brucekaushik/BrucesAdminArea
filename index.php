@@ -30,6 +30,11 @@ if (!isset($_SESSION['username'])){
     $_SESSION['username'] = "none";
 }
 
+// action
+if (@ $_GET['action'] == "VerifyLogin" ){
+	$_SESSION['action'] = "VerifyLogin";
+}
+
 
 // redirect to home page
 header ("Location: home.php");
