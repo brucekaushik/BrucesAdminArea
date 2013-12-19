@@ -51,6 +51,10 @@ if ($_SESSION['loggedin'] == "no"){
             print "<br><center><div style='color: red'><b>Logout Successful, Please feel free to login again.</b></div></center>";
         }
         
+        if(isset($_SESSION['app_name'])){
+        	echo "<center>You will be redirected to " . $_SESSION['app_name'] . "after logging in.</center>" ;
+        }
+        
         // show user the login form
         require 'includes/loginForm.inc.php';
         
@@ -118,17 +122,13 @@ if($_SESSION['loggedin'] == "yes"){
     if($_SESSION['user_active'] == "yes"){
     	
 	    // for convenience sake
-        if(isset($_SESSION["action"])){
+        if(@$_SESSION["action"] == "VerifyLogin"){
         	
         	$url = $_SESSION['verify_back_to'];
         	
-        	unset($_SESSION['verify_back_to']);
-        	unset($_SESSION['action']);
-            	            	
-            // redirect the user to the application page
-            // printf("<script>location.href='$url'</script>"); // javascript is executed after php processes the code, therefore session variables are unset before getting redirected in this case, therefore user is not getting redirected immediately after logging in
-        	header ("Location: $url");
-        	
+        	// redirect the user to the application page
+        	printf("<script>location.href='$url'</script>");
+        	           
         }
 
         // check level of the logged in user, display appropriate screen
